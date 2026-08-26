@@ -15,6 +15,9 @@ Loyiha ma'lumotlar tahlilchisi (Data Analyst) sifatida ma'lumotlarni tozalash, t
 * **Hududiy Taqsimot:** O'zbekiston viloyatlari kesimida kredit portfeli hajmi (Bar Chart).
 * **Sohalar Bo'yicha Tahlil:** Mijozlarning kasb sohalari bo'yicha kreditlar hajmi.
 * **Interaktiv Filtrlash:** Xavf reytingi va jalb qilish kanallari bo'yicha dinamik slicerlar.
+* ![1-sahifa](Screenshot_1.jpg)
+
+
 
 ### 2. **Kredit Riski va NPL Portfeli Monitoringi (Credit Risk & Scoring)**
 * **Risk Ko'rsatkichlari:** Muddati o'tgan qarzlar hajmi, O'rtacha kredit skoring balli, Yuqori riskli mijozlar soni.
@@ -22,12 +25,14 @@ Loyiha ma'lumotlar tahlilchisi (Data Analyst) sifatida ma'lumotlarni tozalash, t
 * **Kredit Turlari Bo'yicha Kechikishlar:** Har bir mahsulot turi bo'yicha o'rtacha to'lov kechikishi kunlari tahlili.
 * **Hududlar va Xavf Matritsasi:** Viloyatlar va xavf guruhlari kesimidagi portfel matritsasi (Heatmap).
 * **Demografik Risk:** Yosh guruhlari va xavf darajalari korrelyatsiyasi.
+* ![2-sahifa](Screenshot_2.jpg)
 
 ### 3. **Mijozlar Segmentatsiyasi va Raqamli Bank Tahlili (Customer Analytics & FinTech)**
 * **Mijozlar Segmentatsiyasi:** Retail, SME, Mass, Corporate va VIP toifalar bo'yicha depozit taqsimoti (Treemap).
 * **Jalb Qilish Kanallari:** Filial, Mobil ilova, Veb-sayt, Agent, Call-center kanallarining samaradorligi va mijozlar faolligi.
 * **Daromad va Kredit Hajmi Korrelyatsiyasi:** Oylik daromad va olingan kredit miqdori o'rtasidagi bog'liqlik (Scatter Plot).
 * **KYC Verifikatsiyasi:** Mijozlarning identifikatsiya statuslari (Tasdiqlangan, Kutilmoqda, Rad etilgan).
+* ![1-sahifa](Screenshot_1.jpg)
 
 ---
 
