@@ -3,45 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Credit Risk Portfolio | Abbosjon</title>
+    <title>Bank Credit Risk & Portfolio Analytics | Abbosjon</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 40px 20px; background: #f8fafc; color: #1e293b; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        h1 { margin-top: 0; color: #0f172a; }
-        .tech-stack { margin: 15px 0; }
-        .tag { background: #e2e8f0; padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-right: 5px; }
-        .dashboard-frame { width: 100%; height: 550px; border: 1px solid #cbd5e1; border-radius: 8px; margin: 25px 0; }
-        .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
-        .metric-card { background: #f1f5f9; padding: 15px; border-radius: 8px; border-left: 4px solid #0284c7; }
-        .btn { display: inline-block; padding: 10px 18px; background: #0284c7; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 28px;
+            color: #1e3a8a;
+            margin: 0 0 12px 0;
+        }
+        .author {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 20px;
+            color: #1e293b;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #2563eb;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .card h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: #1e3a8a;
+        }
+        .card p {
+            margin: 0;
+            font-size: 14px;
+            color: #475569;
+        }
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .screenshot-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .screenshot-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .caption {
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            background: #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+        }
+        .footer-action {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: background 0.2s ease;
+        }
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Commercial Bank: Credit Risk & Portfolio Analysis</h1>
-        <div class="tech-stack">
-            <span class="tag">Power BI</span>
-            <span class="tag">DAX</span>
-            <span class="tag">Python</span>
-            <span class="tag">Data Modeling</span>
-        </div>
-        
-        <p>Ushbu loyiha tijorat bankining kredit portfelidagi NPL (muammoli kreditlar) ulushini pasaytirish, risk konsentratsiyasini nazorat qilish va qaror qabul qilish jarayonini tezlashtirish uchun ishlab chiqilgan 3 sahifali boshqaruv paneli.</p>
-
-        <img src="dashboard_preview.gif" alt="Dashboard Preview" style="width: 100%; border-radius: 8px; border: 1px solid #e2e8f0;">
-
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <h4>NPL & PAR Monitoring</h4>
-                <p>Muddati o‘tgan kreditlar dinamikasi va risk darajasi tahlili.</p>
-            </div>
-            <div class="metric-card">
-                <h4>Portfel Segmentatsiyasi</h4>
-                <p>Kredit turlari, mijoz toifalari va hududlar bo‘yicha balans taqsimoti.</p>
+        <div class="header">
+            <h1>Tijorat Banki: Kredit Portfeli va Risklari Tahlili</h1>
+            <div class="author">Muallif: <strong>Abbosjon</strong> | Data Analyst Portfolio</div>
+            <div class="tech-stack">
+                <span class="tag">Power BI</span>
+                <span class="tag">DAX</span>
+                <span class="tag">Python</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Credit Risk Analytics</span>
             </div>
         </div>
 
-        <a href="https:[https://github.com/wggg988-sketch/Bank-Customer-Credit-Risk-Analytics-PowerBI](https://github.com/wggg988-sketch/Bank-Customer-Credit-Risk-Analytics-PowerBI)" class="btn" target="_blank">GitHub Repositoriyani Ko‘rish</a>
+        <p>
+            Ushbu loyiha tijorat bankining kredit portfelini har tomonlama tahlil qilish, muammoli kreditlar (NPL/PAR) dinamikasini nazorat qilish va kredit risklarini minimallashtirish uchun ishlab chiqilgan 3 sahifali interaktiv boshqaruv paneli hisoblanadi.
+        </p>
+
+        <div class="section-title">Loyiha xususiyatlari</div>
+        <div class="grid-cards">
+            <div class="card">
+                <h3>Kredit Riski va NPL Monitoringi</h3>
+                <p>Muddati o‘tgan kreditlar ulushi, xatarli guruhlar va proviziya zaxiralarining dinamik monitoringi.</p>
+            </div>
+            <div class="card">
+                <h3>Portfel Segmentatsiyasi</h3>
+                <p>Kredit turlari, mijozlar toifasi, ta’minot va sohalar bo‘yicha balans taqsimoti tahlili.</p>
+            </div>
+            <div class="card">
+                <h3>Ma’lumotlar Modeli & DAX</h3>
+                <p>Star schema modeli, tozalangan ma’lumotlar qatlami hamda murakkab moliyaviy hisob-kitob choralari.</p>
+            </div>
+        </div>
+
+        <div class="section-title">Dashboard Sahifalari</div>
+        <div class="gallery">
+            <div class="screenshot-box">
+                <img src="Screenshot_1.jpg" alt="Dashboard Sahifa 1">
+                <div class="caption">1-sahifa: Kredit portfelining umumiy holati va asosiy ko‘rsatkichlar (KPIs)</div>
+            </div>
+            <div class="screenshot-box">
+                <img src="Screenshot_2.jpg" alt="Dashboard Sahifa 2">
+                <div class="caption">2-sahifa: Kredit risklari va muammoli aktivlar (NPL/PAR) tahlili</div>
+            </div>
+            <div class="screenshot-box">
+                <img src="Screenshot_3.jpg" alt="Dashboard Sahifa 3">
+                <div class="caption">3-sahifa: Mijozlar segmentatsiyasi va kredit konsentratsiyasi</div>
+            </div>
+        </div>
+
+        <div class="footer-action">
+            <a href="https://github.com/wggg988-sketch/Bank-Customer-Credit-Risk-Analytics-PowerBI" class="btn" target="_blank">
+                GitHub Repositoriyani Ko‘rish
+            </a>
+        </div>
     </div>
+
 </body>
 </html>
