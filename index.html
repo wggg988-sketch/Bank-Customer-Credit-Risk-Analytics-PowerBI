@@ -1,190 +1,421 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="uz" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Credit Risk & Portfolio Analytics | Abbosjon</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            margin: 0;
-            padding: 40px 20px;
-            background-color: #f1f5f9;
-            color: #0f172a;
-            line-height: 1.6;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Kredit Portfeli va Risk Analitikasi | Portfolio</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Prism.js Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              excel: '#107c41',
+              sql: '#336791',
+              python: '#3776ab',
+              pbi: '#f2c811'
+            }
+          }
         }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-        }
-        .header {
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 28px;
-            color: #1e3a8a;
-            margin: 0 0 12px 0;
-        }
-        .author {
-            font-size: 15px;
-            color: #64748b;
-            margin-bottom: 15px;
-        }
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .tag {
-            background-color: #e0f2fe;
-            color: #0369a1;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .section-title {
-            font-size: 20px;
-            color: #1e293b;
-            margin: 30px 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .grid-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid #2563eb;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .card h3 {
-            margin: 0 0 8px 0;
-            font-size: 16px;
-            color: #1e3a8a;
-        }
-        .card p {
-            margin: 0;
-            font-size: 14px;
-            color: #475569;
-        }
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin: 30px 0;
-        }
-        .screenshot-box {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .screenshot-box img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .caption {
-            padding: 12px 16px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #334155;
-            background: #f1f5f9;
-            border-top: 1px solid #e2e8f0;
-        }
-        .footer-action {
-            margin-top: 40px;
-            padding-top: 25px;
-            border-top: 2px solid #e2e8f0;
-            text-align: center;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #2563eb;
-            color: #ffffff;
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: background 0.2s ease;
-        }
-        .btn:hover {
-            background-color: #1d4ed8;
-        }
-    </style>
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen">
 
-    <div class="container">
-        <div class="header">
-            <h1>Tijorat Banki: Kredit Portfeli va Risklari Tahlili</h1>
-            <div class="author">Muallif: <strong>Abbosjon</strong> | Data Analyst Portfolio</div>
-            <div class="tech-stack">
-                <span class="tag">Power BI</span>
-                <span class="tag">DAX</span>
-                <span class="tag">Python</span>
-                <span class="tag">SQL</span>
-                <span class="tag">Credit Risk Analytics</span>
-            </div>
+  <!-- Sticky Navbar -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center space-x-3">
+        <div class="p-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-emerald-400">
+          <i class="fa-solid fa-chart-line text-lg"></i>
         </div>
-
-        <p>
-            Ushbu loyiha tijorat bankining kredit portfelini har tomonlama tahlil qilish, muammoli kreditlar (NPL/PAR) dinamikasini nazorat qilish va kredit risklarini minimallashtirish uchun ishlab chiqilgan 3 sahifali interaktiv boshqaruv paneli hisoblanadi.
-        </p>
-
-        <div class="section-title">Loyiha xususiyatlari</div>
-        <div class="grid-cards">
-            <div class="card">
-                <h3>Kredit Riski va NPL Monitoringi</h3>
-                <p>Muddati o‘tgan kreditlar ulushi, xatarli guruhlar va proviziya zaxiralarining dinamik monitoringi.</p>
-            </div>
-            <div class="card">
-                <h3>Portfel Segmentatsiyasi</h3>
-                <p>Kredit turlari, mijozlar toifasi, ta’minot va sohalar bo‘yicha balans taqsimoti tahlili.</p>
-            </div>
-            <div class="card">
-                <h3>Ma’lumotlar Modeli & DAX</h3>
-                <p>Star schema modeli, tozalangan ma’lumotlar qatlami hamda murakkab moliyaviy hisob-kitob choralari.</p>
-            </div>
+        <div>
+          <h1 class="font-bold text-base md:text-lg text-white">Bank Kredit Portfeli & Risk Tahlili</h1>
+          <p class="text-xs text-slate-400">End-to-End Data Pipeline: Excel &bull; PostgreSQL &bull; Python &bull; Power BI</p>
         </div>
-
-        <div class="section-title">Dashboard Sahifalari</div>
-        <div class="gallery">
-            <div class="screenshot-box">
-                <img src="Screenshot_1.jpg" alt="Dashboard Sahifa 1">
-                <div class="caption">1-sahifa: Kredit portfelining umumiy holati va asosiy ko‘rsatkichlar (KPIs)</div>
-            </div>
-            <div class="screenshot-box">
-                <img src="Screenshot_2.jpg" alt="Dashboard Sahifa 2">
-                <div class="caption">2-sahifa: Kredit risklari va muammoli aktivlar (NPL/PAR) tahlili</div>
-            </div>
-            <div class="screenshot-box">
-                <img src="Screenshot_3.jpg" alt="Dashboard Sahifa 3">
-                <div class="caption">3-sahifa: Mijozlar segmentatsiyasi va kredit konsentratsiyasi</div>
-            </div>
-        </div>
-
-        <div class="footer-action">
-            <a href="https://github.com/wggg988-sketch/Bank-Customer-Credit-Risk-Analytics-PowerBI" class="btn" target="_blank">
-                GitHub Repositoriyani Ko‘rish
-            </a>
-        </div>
+      </div>
+      <!-- Tab Navigation -->
+      <nav class="flex flex-wrap gap-1.5 text-xs font-medium">
+        <a href="#overview" class="px-3 py-1.5 rounded-md hover:bg-slate-800 transition text-slate-300 hover:text-white">Umumiy</a>
+        <a href="#excel" class="px-3 py-1.5 rounded-md bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 hover:bg-emerald-900 transition">1. Excel</a>
+        <a href="#sql" class="px-3 py-1.5 rounded-md bg-sky-950/60 text-sky-400 border border-sky-800/60 hover:bg-sky-900 transition">2. SQL (Postgres)</a>
+        <a href="#python" class="px-3 py-1.5 rounded-md bg-blue-950/60 text-blue-400 border border-blue-800/60 hover:bg-blue-900 transition">3. Python (EDA)</a>
+        <a href="#powerbi" class="px-3 py-1.5 rounded-md bg-amber-950/60 text-amber-400 border border-amber-800/60 hover:bg-amber-900 transition">4. Power BI</a>
+      </nav>
     </div>
+  </header>
 
+  <div class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+
+    <!-- KPI Summary Section -->
+    <section id="overview" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+        <span class="text-xs text-slate-400 block mb-1">Jami Mijozlar</span>
+        <span class="text-xl md:text-2xl font-black text-white">4 000</span>
+        <span class="text-[10px] text-slate-500 block mt-1">2000 Ayol / 2000 Erkak</span>
+      </div>
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+        <span class="text-xs text-slate-400 block mb-1">Kredit Portfeli</span>
+        <span class="text-xl md:text-2xl font-black text-purple-400">50.4 mlrd</span>
+        <span class="text-[10px] text-slate-500 block mt-1">1 670 ta shartnoma (41.8%)</span>
+      </div>
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+        <span class="text-xs text-slate-400 block mb-1">Depozit Portfeli</span>
+        <span class="text-xl md:text-2xl font-black text-amber-400">10.1 mlrd</span>
+        <span class="text-[10px] text-slate-500 block mt-1">Mijozlarning 34.8% qismi</span>
+      </div>
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+        <span class="text-xs text-slate-400 block mb-1">O‘rtacha Daromad</span>
+        <span class="text-xl md:text-2xl font-black text-emerald-400">6.91 mln</span>
+        <span class="text-[10px] text-slate-500 block mt-1">O‘rtacha yosh: 37.8</span>
+      </div>
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+        <span class="text-xs text-slate-400 block mb-1">O‘rtacha Skoring</span>
+        <span class="text-xl md:text-2xl font-black text-blue-400">618.3</span>
+        <span class="text-[10px] text-slate-500 block mt-1">Reyting: O‘rta (500–649)</span>
+      </div>
+      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-center">
+        <span class="text-xs text-slate-400 block mb-1">Raqamli Mijozlar</span>
+        <span class="text-xl md:text-2xl font-black text-emerald-400">86.2%</span>
+        <span class="text-[10px] text-slate-500 block mt-1">3 448 ta raqamli</span>
+      </div>
+    </section>
+
+    <!-- 1. EXCEL SECTION -->
+    <section id="excel" class="bg-slate-900/70 rounded-2xl border border-slate-800 p-6 space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="p-2.5 bg-emerald-950 text-emerald-400 rounded-xl text-xl border border-emerald-800">
+          <i class="fa-solid fa-file-excel"></i>
+        </div>
+        <div>
+          <h2 class="text-lg md:text-xl font-bold text-white">1-Bosqich: Excel Bazasini Shakllantirish va Pivot Tahlil</h2>
+          <p class="text-xs text-slate-400">4000 ta mijozning demografik, moliyaviy va kredit faolligi tahlili</p>
+        </div>
+      </div>
+
+      <!-- Pivot Tables Grid -->
+      <div class="grid md:grid-cols-3 gap-4 text-xs">
+        <!-- Viloyatlar kesimi -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <h4 class="font-semibold text-emerald-400 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-location-dot"></i> Hududiy Taqsimot (Top viloyatlar)
+          </h4>
+          <div class="space-y-1.5 text-slate-300">
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Toshkent shahri</span><span class="font-bold text-white">953 (23.8%)</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Toshkent viloyati</span><span class="font-bold text-white">478</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Samarqand</span><span class="font-bold text-white">369</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Andijon</span><span class="font-bold text-white">315</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Farg‘ona</span><span class="font-bold text-white">305</span></div>
+            <div class="flex justify-between py-1 text-slate-400"><span>Boshqa 9 ta hudud</span><span>1 580</span></div>
+          </div>
+        </div>
+
+        <!-- Yosh va Jins kesimi -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <h4 class="font-semibold text-emerald-400 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-users"></i> Yosh va Jins Taqsimoti
+          </h4>
+          <div class="space-y-1.5 text-slate-300">
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>18–24 yosh</span><span>282 A / 290 E (572)</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>25–34 yosh</span><span>500 A / 510 E (1010)</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900 text-emerald-300 font-semibold"><span>35–44 yosh (Eng faol)</span><span>648 A / 640 E (1288)</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>45–54 yosh</span><span>423 A / 397 E (820)</span></div>
+            <div class="flex justify-between py-1"><span>55+ yosh</span><span>147 A / 163 E (310)</span></div>
+          </div>
+        </div>
+
+        <!-- Daromad va Skoring Kesimi -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <h4 class="font-semibold text-emerald-400 mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-wallet"></i> Daromad & Skoring Matritsasi
+          </h4>
+          <div class="space-y-1.5 text-slate-300">
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>O‘rta daromad (3–7 mln)</span><span class="font-bold text-white">1 770 ta (44.3%)</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Yuqori (7–15 mln)</span><span class="font-bold text-white">1 113 ta</span></div>
+            <div class="flex justify-between py-1 border-b border-slate-900"><span>Past (< 3 mln)</span><span class="font-bold text-white">810 ta</span></div>
+            <div class="flex justify-between py-1"><span>Juda yuqori (15+ mln)</span><span class="font-bold text-white">307 ta</span></div>
+            <div class="pt-2 text-[11px] text-slate-400 border-t border-slate-800">
+              *Mijozlarning 2206 tasi o‘rtacha (500–649) kredit reytingida.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Excel Xulosalari va Tavsiyalar -->
+      <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-2">
+        <h4 class="font-semibold text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-emerald-400"></i> Excel Tahlili Xulosalari va Tavsiyalar:
+        </h4>
+        <p><strong class="text-slate-200">Asosiy segment:</strong> Bank mijozlari asosan 25–44 yosh oralig‘idagi (umumiy portfelning 57% dan ortig‘i), shahar hududlarida yashovchi va raqamli xizmatlardan faol foydalanuvchi qatlamdir.</p>
+        <p><strong class="text-slate-200">Tavsiya:</strong> Yosh va o‘rta yoshdagi mijozlar uchun moslashtirilgan onlayn kredit liniyalarini kengaytirish hamda past kredit reytingiga ega mijozlar (346 ta "Yomon" skoring) uchun xatarni oldindan baholash mexanizmlarini kuchaytirish.</p>
+      </div>
+    </section>
+
+    <!-- 2. SQL SECTION -->
+    <section id="sql" class="bg-slate-900/70 rounded-2xl border border-slate-800 p-6 space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="p-2.5 bg-sky-950 text-sky-400 rounded-xl text-xl border border-sky-800">
+          <i class="fa-solid fa-database"></i>
+        </div>
+        <div>
+          <h2 class="text-lg md:text-xl font-bold text-white">2-Bosqich: PostgreSQL Ma’lumotlar Bazasi va Skriptlar</h2>
+          <p class="text-xs text-slate-400"><code>bank_tahlil</code> bazasi, <code>mijozlar</code> jadvali (50 ta ustun) va chuqur analitik SQL so‘rovlari</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- SQL 1: Table Creation -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-sky-400 block mb-1">01_create_table.sql</span>
+            <p class="text-xs text-slate-400 mb-2">Baza yaratish va ustunlar sxemasi:</p>
+            <pre class="text-xs rounded max-h-56 overflow-y-auto"><code class="language-sql">CREATE DATABASE bank_tahlil;
+\c bank_tahlil
+
+CREATE TABLE mijozlar (
+    mijoz_id VARCHAR PRIMARY KEY,
+    "to'liq_ism" TEXT,
+    jinsi TEXT,
+    "tug'ilgan_sana" DATE,
+    yoshi INT,
+    "Yosh_guruxi" TEXT,
+    viloyat TEXT,
+    bank TEXT,
+    "o'rtacha_oylik_daromad_uzs" BIGINT,
+    kredit_reytingi INT,
+    kredit_mavjud TEXT,
+    kredit_summasi_uzs BIGINT,
+    kredit_turi TEXT,
+    yillik_foiz_stavkasi REAL,
+    "muddati_o'tgan_qarz" TEXT,
+    "muddati_o'tgan_kunlar" INT,
+    "Raqamli_mijoz" TEXT
+);</code></pre>
+          </div>
+        </div>
+
+        <!-- SQL 2: Window Functions / Top mijozlar -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-sky-400 block mb-1">02_window_ranking.sql</span>
+            <p class="text-xs text-slate-400 mb-2">Har bir viloyat bo‘yicha Top-3 yirik kredit oluvchilar (DENSE_RANK):</p>
+            <pre class="text-xs rounded max-h-56 overflow-y-auto"><code class="language-sql">WITH ViloyatReyting AS (
+  SELECT 
+    mijoz_id, "to'liq_ism", viloyat, kredit_turi, kredit_summasi_uzs,
+    DENSE_RANK() OVER(
+      PARTITION BY viloyat 
+      ORDER BY kredit_summasi_uzs DESC
+    ) AS orin
+  FROM mijozlar
+  WHERE kredit_mavjud = 'Ha'
+)
+SELECT viloyat, orin, mijoz_id, "to'liq_ism", kredit_turi, kredit_summasi_uzs
+FROM ViloyatReyting
+WHERE orin <= 3
+ORDER BY viloyat, orin;</code></pre>
+          </div>
+        </div>
+
+        <!-- SQL 3: Xavfli mijozlar tahlili -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <span class="text-xs font-mono text-sky-400 block mb-1">03_credit_risk_query.sql</span>
+          <p class="text-xs text-slate-400 mb-2">Kredit muddati kechikkan va skoringi past xavfli mijozlar:</p>
+          <pre class="text-xs rounded max-h-52 overflow-y-auto"><code class="language-sql">SELECT 
+    mijoz_id, "to'liq_ism", viloyat, kredit_reytingi, 
+    kredit_summasi_uzs, "muddati_o'tgan_kunlar"
+FROM mijozlar
+WHERE "muddati_o'tgan_qarz" = 'Ha' 
+  AND kredit_reytingi < 600
+ORDER BY "muddati_o'tgan_kunlar" DESC
+LIMIT 15;</code></pre>
+        </div>
+
+        <!-- SQL 4: Portfel agregatsiyasi -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <span class="text-xs font-mono text-sky-400 block mb-1">04_portfolio_summary.sql</span>
+          <p class="text-xs text-slate-400 mb-2">Umumiy portfel ko‘rsatkichlarini hisoblash so‘rovi:</p>
+          <pre class="text-xs rounded max-h-52 overflow-y-auto"><code class="language-sql">SELECT 
+    COUNT(mijoz_id) AS jami_mijozlar,
+    COUNT(CASE WHEN kredit_mavjud = 'Ha' THEN 1 END) AS kredit_olganlar_soni,
+    SUM(kredit_summasi_uzs) AS jami_kredit_portfeli,
+    SUM(depozit_summasi_uzs) AS jami_depozit_portfeli,
+    ROUND(AVG("o'rtacha_oylik_daromad_uzs"), 0) AS ortacha_daromad_uzs,
+    ROUND(AVG(kredit_reytingi), 0) AS ortacha_kredit_skori
+FROM mijozlar;
+-- Natija: 4000 mijoz | 1670 kredit | 50.4 mlrd portfel | 10.1 mlrd depozit</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PYTHON SECTION -->
+    <section id="python" class="bg-slate-900/70 rounded-2xl border border-slate-800 p-6 space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="p-2.5 bg-blue-950 text-blue-400 rounded-xl text-xl border border-blue-800">
+          <i class="fa-brands fa-python"></i>
+        </div>
+        <div>
+          <h2 class="text-lg md:text-xl font-bold text-white">3-Bosqich: Python (Google Colab) EDA va Data Science Ishlovlari</h2>
+          <p class="text-xs text-slate-400">Outlier tahlili (IQR), Korrelyatsiya matritsasi, Boxplot va Mijozlarni segmentlash (Tier 1-3)</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <!-- Python Skripti 1: IQR & Outliers -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <span class="text-xs font-mono text-blue-400 block mb-1">01_data_cleaning_and_iqr.py</span>
+          <p class="text-xs text-slate-400 mb-2">Kredit yuki bo‘yicha anomal (Outlier) qarz oluvchilarni topish:</p>
+          <pre class="text-xs rounded max-h-56 overflow-y-auto"><code class="language-python"># Ustunlar turlarini to'g'irlash va Outlier (IQR) aniqlash
+q1 = df['Kredit_yuklamasi_foiz'].quantile(0.25)
+q3 = df['Kredit_yuklamasi_foiz'].quantile(0.75)
+iqr = q3 - q1
+upper_limit = q3 + 1.5 * iqr
+
+outliers_dti = df[df['Kredit_yuklamasi_foiz'] > upper_limit]
+print(f"Kredit yuki o'ta yuqori (Outlier) mijozlar soni: {len(outliers_dti)} ta")
+# Chiqish: 559 ta mijoz o'ta yuqori risk doirasida aniqlandi</code></pre>
+        </div>
+
+        <!-- Python Skripti 2: Tiering va Churn -->
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <span class="text-xs font-mono text-blue-400 block mb-1">02_customer_tiering.py</span>
+          <p class="text-xs text-slate-400 mb-2">Mijoz qiymat indeksi va Churn xavfini modellashtirish:</p>
+          <pre class="text-xs rounded max-h-56 overflow-y-auto"><code class="language-python"># Bank uchun mijoz qiymat indeksini hisoblash
+df['mijoz_qiymat_indeksi'] = (
+    df["o'rtacha_oylik_daromad_uzs"] * 0.10 +
+    df["hisob_qoldig'i_uzs"] * 0.05 +
+    df["oxirgi_oy_tranzaksiya_hajmi_uzs"] * 0.02
+)
+
+# Kvantillar bo'yicha toifalash (Platina, Oltin, Oddiy)
+df['mijoz_toifasi'] = pd.qcut(
+    df['mijoz_qiymat_indeksi'], q=3, 
+    labels=['Oddiy (Tier 3)', 'Oltin (Tier 2)', 'Platina (Tier 1)']
+)</code></pre>
+        </div>
+      </div>
+
+      <!-- Vizualizatsiya xulosalari (Heatmap, Portfel, Boxplot) -->
+      <div class="grid md:grid-cols-3 gap-4 text-xs">
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <h4 class="font-semibold text-white mb-1"><i class="fa-solid fa-fire text-red-400 mr-1.5"></i> Korrelyatsiya Tahlili</h4>
+          <p class="text-slate-400">Kredit summasi va kredit yuki foizi o‘rtasida o‘rtacha ijobiy bog‘liqlik (<strong>r = 0.52</strong>) mavjud. Yoshi va daromad esa kredit reytingiga to‘g‘ridan-to‘g‘ri chiziqli ta'sir o‘tkazmaydi.</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <h4 class="font-semibold text-white mb-1"><i class="fa-solid fa-chart-column text-blue-400 mr-1.5"></i> Portfel Konsentratsiyasi</h4>
+          <p class="text-slate-400">Kredit berish hajmi bo‘yicha <strong>Toshkent shahri (1.16e10 UZS)</strong> mutloq yetakchi, undan keyin Toshkent viloyati va Samarqand joylashgan.</p>
+        </div>
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+          <h4 class="font-semibold text-white mb-1"><i class="fa-solid fa-box-archive text-emerald-400 mr-1.5"></i> Skoring Taqsimoti (Boxplot)</h4>
+          <p class="text-slate-400">Kredit turlari (Ipoteka, Avtokredit, Mikroqarz, Overdraft) bo‘yicha mijozlarning o‘rtacha median skoringi 600–650 atrofida barqaror taqsimlangan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. POWER BI SECTION -->
+    <section id="powerbi" class="bg-slate-900/70 rounded-2xl border border-slate-800 p-6 space-y-6">
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-4">
+        <div class="p-2.5 bg-amber-950 text-amber-400 rounded-xl text-xl border border-amber-800">
+          <i class="fa-solid fa-chart-pie"></i>
+        </div>
+        <div>
+          <h2 class="text-lg md:text-xl font-bold text-white">4-Bosqich: Power BI Interaktiv Dashboard (3 Sahifa)</h2>
+          <p class="text-xs text-slate-400">Rahbariyat va risk-menejment uchun tayyorlangan executive hisobot sahifalari</p>
+        </div>
+      </div>
+
+      <!-- Sahifalar kartochkalari -->
+      <div class="space-y-6">
+
+        <!-- Sahifa 1 -->
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-900 pb-2">
+            <h3 class="font-bold text-sm md:text-base text-amber-300">
+              1-Sahifa: Bank Mijozlari va Kredit Portfeli Tahlili
+            </h3>
+            <span class="text-xs bg-slate-900 text-slate-400 px-2.5 py-1 rounded border border-slate-800">Umumiy Portfel Monitoringi</span>
+          </div>
+          <p class="text-xs text-slate-300">
+            <strong>Asosiy KPI kartalari:</strong> 4K Jami mijozlar, 10bn Depozit portfeli, 3bn Muddati o‘tgan qarzlar, 50bn Jami kredit portfeli.
+          </p>
+          <div class="grid md:grid-cols-2 gap-3 text-xs text-slate-400">
+            <div class="bg-slate-900/70 p-3 rounded border border-slate-800/80">
+              <strong class="text-slate-200 block mb-1">Kredit turlari tarkibi (Donut chart):</strong>
+              Mikroqarz (15.1%), Ipoteka (15.1%), Iste'mol krediti (14.6%), Overdraft (14.5%), Avtokredit (13.8%), Biznes krediti (13.5%).
+            </div>
+            <div class="bg-slate-900/70 p-3 rounded border border-slate-800/80">
+              <strong class="text-slate-200 block mb-1">Sohalar kesimida taqsimot (Bar chart):</strong>
+              O‘zini o‘zi band qilganlar, Davlat xizmati, Qurilish va Turizm sohalari kredit hajmi bo‘yicha yetakchilik qilmoqda.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sahifa 2 -->
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-900 pb-2">
+            <h3 class="font-bold text-sm md:text-base text-red-400">
+              2-Sahifa: Kredit Riski va NPL Portfeli Monitoringi
+            </h3>
+            <span class="text-xs bg-red-950/60 text-red-400 px-2.5 py-1 rounded border border-red-800/50">Risk Management</span>
+          </div>
+          <p class="text-xs text-slate-300">
+            <strong>Asosiy Risk Metrikalari:</strong> 3bn Muddati o‘tgan qarz summasi, 618.25 O‘rtacha kredit reytingi, 789 ta Yuqori riskli mijozlar guruhi.
+          </p>
+          <div class="grid md:grid-cols-2 gap-3 text-xs text-slate-400">
+            <div class="bg-slate-900/70 p-3 rounded border border-slate-800/80">
+              <strong class="text-slate-200 block mb-1">Xavf darajalari bo‘yicha kreditlar:</strong>
+              Past xavf: 22bn (42.6%), O‘rta: 18bn (36.2%), Yuqori: 8bn (16.0%), Juda yuqori: 3bn (5.1%).
+            </div>
+            <div class="bg-slate-900/70 p-3 rounded border border-slate-800/80">
+              <strong class="text-slate-200 block mb-1">Kredit turlari bo‘yicha kechikish kunlari:</strong>
+              Overdraft va Mikroqarz mahsulotlarida muddati o‘tgan kunlar soni va xavf darajasi eng yuqori ekani aniqlandi.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sahifa 3 -->
+        <div class="bg-slate-950 p-5 rounded-xl border border-slate-800 space-y-3">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-900 pb-2">
+            <h3 class="font-bold text-sm md:text-base text-sky-400">
+              3-Sahifa: Mijozlar Segmentatsiyasi va Raqamli Bank Tahlili
+            </h3>
+            <span class="text-xs bg-sky-950/60 text-sky-400 px-2.5 py-1 rounded border border-sky-800/50">Digital & Growth</span>
+          </div>
+          <p class="text-xs text-slate-300">
+            <strong>Asosiy Ko‘rsatkichlar:</strong> 50bn Kredit portfeli, 2K Faol mijozlar, 10bn Depozitlar, KYC verifikatsiyasi (Tasdiqlanganlar asosiy ulush).
+          </p>
+          <div class="grid md:grid-cols-2 gap-3 text-xs text-slate-400">
+            <div class="bg-slate-900/70 p-3 rounded border border-slate-800/80">
+              <strong class="text-slate-200 block mb-1">Mijoz segmentlari (Treemap):</strong>
+              Retail va SME mijozlar portfelning eng katta qismini egallaydi; Corporate va VIP segmentlar esa eng yuqori o‘rtacha hajmga ega.
+            </div>
+            <div class="bg-slate-900/70 p-3 rounded border border-slate-800/80">
+              <strong class="text-slate-200 block mb-1">Jalb qilish kanallari va faollik:</strong>
+              Filial, Agent va Veb-sayt orqali jalb qilingan mijozlar eng faol bo‘lib, kredit va depozit hajmining asosiy drayverlari hisoblanadi.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-8 bg-slate-900 text-center text-xs text-slate-500">
+    <p class="font-semibold text-slate-400">Tijorat Banklari Kredit Portfeli va Risklari Tahlili</p>
+    <p class="mt-1">Amaliyotchi: Toshmuxammedov Abbosjon | Ma'lumotlar bazasi va Biznes Analitikasi</p>
+  </footer>
+
+  <!-- Prism Syntax Highlighter Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
