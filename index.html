@@ -3,452 +3,276 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bank Portfolio & Risk Intelligence App</title>
+  <title>Bank Credit Analytics Platform | Portfolio Project</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
   <style>
-    .tab-content { display: none; }
-    .tab-content.active { display: block; animation: fadeIn 0.25s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-    .table-ui th, .table-ui td { border-bottom: 1px solid #1e293b; padding: 8px 12px; font-size: 12px; }
-    .table-ui th { background-color: #0f172a; color: #94a3b8; font-weight: 600; text-transform: uppercase; font-size: 10px; letter-spacing: 0.05em; }
+    .view-content { display: none; }
+    .view-content.active { display: flex; flex-direction: column; flex: 1; animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+    .nav-btn.active { background-color: #064e3b; color: #34d399; border: 1px solid #059669; }
+    .pbi-screen { display: none; }
+    .pbi-screen.active { display: block; }
   </style>
 </head>
-<body class="h-full text-slate-200 font-sans flex flex-col md:flex-row overflow-hidden">
+<body class="h-full text-slate-200 font-sans flex flex-col md:flex-row overflow-hidden select-none">
 
-  <!-- SIDEBAR NAVIGATION -->
-  <aside class="w-full md:w-64 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="w-full md:w-72 bg-slate-900 border-r border-slate-800 flex flex-col justify-between shrink-0">
     <div>
-      <!-- App Brand -->
-      <div class="p-5 border-b border-slate-800 flex items-center gap-3">
-        <div class="h-9 w-9 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center font-bold">
-          <i class="fa-solid fa-vault"></i>
+      <!-- Brand / Logo -->
+      <div class="p-4 border-b border-slate-800 flex items-center gap-3">
+        <div class="h-10 w-10 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-lg font-bold shadow-sm">
+          <i class="fa-solid fa-chart-line"></i>
         </div>
         <div>
-          <h1 class="text-sm font-bold text-white leading-none">Bank Risk Hub</h1>
-          <span class="text-[10px] text-slate-400">Credit Analytics System</span>
+          <h1 class="text-sm font-bold text-white leading-tight">Bank Analytics Hub</h1>
+          <span class="text-[11px] text-slate-400">Credit Risk & Portfolio v1.0</span>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
       <div class="p-3 space-y-1">
-        <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Pipeline Bosqichlari</div>
-        
-        <button onclick="switchTab('tab-overview')" id="btn-overview" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 transition">
-          <i class="fa-solid fa-gauge-high w-4 text-center"></i> Boshqaruv Paneli (KPI)
+        <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tahliliy Modullar</div>
+
+        <!-- 1. PDF Full Report (Word asosidagi hisobot) -->
+        <button onclick="switchView('view-report')" id="btn-report" class="nav-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+          <i class="fa-solid fa-file-lines w-4 text-center text-emerald-400"></i> To'liq Qadamlar (PDF Hisobot)
         </button>
 
-        <button onclick="switchTab('tab-excel')" id="btn-excel" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
-          <i class="fa-solid fa-file-excel w-4 text-center text-emerald-500"></i> 1. Excel Tahlili
+        <!-- 2. Power BI Dashboard -->
+        <button onclick="switchView('view-pbi')" id="btn-pbi" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+          <i class="fa-solid fa-chart-pie w-4 text-center text-purple-400"></i> Power BI Dashboard
         </button>
 
-        <button onclick="switchTab('tab-sql')" id="btn-sql" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
-          <i class="fa-solid fa-database w-4 text-center text-sky-400"></i> 2. PostgreSQL Skriptlari
-        </button>
-
-        <button onclick="switchTab('tab-python')" id="btn-python" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
-          <i class="fa-brands fa-python w-4 text-center text-amber-400"></i> 3. Python (Colab EDA)
-        </button>
-
-        <button onclick="switchTab('tab-powerbi')" id="btn-powerbi" class="tab-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
-          <i class="fa-solid fa-chart-pie w-4 text-center text-purple-400"></i> 4. Power BI Dashboard
+        <!-- 3. Metrikalar va Xulosalar -->
+        <button onclick="switchView('view-summary')" id="btn-summary" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+          <i class="fa-solid fa-gauge-high w-4 text-center text-sky-400"></i> Portfel Metrikalari & KPI
         </button>
       </div>
     </div>
 
-    <!-- User & Repository Info -->
-    <div class="p-4 border-t border-slate-800 bg-slate-900/50">
-      <div class="text-[11px] text-slate-400 flex items-center justify-between mb-2">
-        <span>Dataset:</span> <strong class="text-white">4,000 Mijoz</strong>
-      </div>
-      <div class="flex gap-2">
-        <a href="Bank_Portfolio_Analytics_Dashboard.pbix" download class="flex-1 py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[10px] text-center border border-slate-700 transition">
-          .PBIX Yuklash
-        </a>
-        <a href="Bank_Mijozlari_Tozalangan_Excel.xlsx" download class="flex-1 py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded text-[10px] text-center border border-slate-700 transition">
-          .XLSX Yuklash
-        </a>
-      </div>
+    <!-- Yuklab olish bo'limi -->
+    <div class="p-4 border-t border-slate-800 bg-slate-950/60 space-y-2">
+      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Loyiha Fayllari:</span>
+      <a href="Bank_Portfolio_Analytics_Dashboard.pbix" download class="w-full flex items-center justify-between px-3 py-2 bg-purple-950/50 hover:bg-purple-900/60 border border-purple-800/60 rounded-lg text-xs text-purple-300 transition">
+        <span><i class="fa-solid fa-download mr-1.5"></i> Power BI (.PBIX)</span>
+        <span class="text-[10px] bg-purple-900/80 px-1.5 py-0.5 rounded">Yuklash</span>
+      </a>
+      <a href="Bank_Mijozlari_Tozalangan_Excel.xlsx" download class="w-full flex items-center justify-between px-3 py-2 bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-800/60 rounded-lg text-xs text-emerald-300 transition">
+        <span><i class="fa-solid fa-file-excel mr-1.5"></i> Excel Baza (.XLSX)</span>
+        <span class="text-[10px] bg-emerald-900/80 px-1.5 py-0.5 rounded">Yuklash</span>
+      </a>
+      <a href="hisobot%20.pdf" download class="w-full flex items-center justify-between px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs text-slate-300 transition">
+        <span><i class="fa-solid fa-file-pdf mr-1.5 text-rose-400"></i> PDF Hisobot</span>
+        <span class="text-[10px] bg-slate-700 px-1.5 py-0.5 rounded">PDF</span>
+      </a>
     </div>
   </aside>
 
-  <!-- MAIN DASHBOARD CONTENT -->
+  <!-- ================= MAIN WORKSPACE ================= -->
   <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-950">
 
-    <!-- Top Status Bar -->
-    <div class="h-14 border-b border-slate-800 bg-slate-900/60 px-6 flex items-center justify-between shrink-0">
-      <div id="page-title" class="text-sm font-semibold text-white">Boshqaruv Paneli & Portfel Ko'rsatkichlari</div>
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-medium bg-emerald-950 text-emerald-400 border border-emerald-800">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Jonli Tahlil Bazasida
+    <!-- Top Bar -->
+    <header class="h-16 border-b border-slate-800 bg-slate-900/80 backdrop-blur px-6 flex items-center justify-between shrink-0">
+      <div>
+        <h2 id="top-title" class="text-sm md:text-base font-bold text-white">Qadamma-Qadam Tahlil Hisoboti</h2>
+        <p class="text-[11px] text-slate-400">Excel &bull; PostgreSQL &bull; Python (Google Colab) &bull; Power BI</p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-950 text-emerald-400 border border-emerald-800">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> 4 000 ta Mijoz Tahlili
         </span>
       </div>
-    </div>
+    </header>
 
-    <!-- Scrollable Workspace -->
-    <div class="flex-1 overflow-y-auto p-6 space-y-6">
-
-      <!-- ============================================ -->
-      <!-- TAB 1: OVERVIEW / DASHBOARD -->
-      <!-- ============================================ -->
-      <div id="tab-overview" class="tab-content active space-y-6">
-        <!-- 6 Asosiy Metrika -->
-        <div class="grid grid-cols-2 lg:grid-cols-6 gap-3">
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-            <span class="text-[11px] text-slate-400">Jami Mijoz</span>
-            <div class="text-xl font-bold text-white mt-1">4,000</div>
-            <span class="text-[10px] text-slate-500">50% A / 50% E</span>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-            <span class="text-[11px] text-slate-400">Kredit Portfeli</span>
-            <div class="text-xl font-bold text-purple-400 mt-1">50.4 mlrd</div>
-            <span class="text-[10px] text-slate-500">1,670 ta mijoz</span>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-            <span class="text-[11px] text-slate-400">Depozit Portfeli</span>
-            <div class="text-xl font-bold text-amber-400 mt-1">10.1 mlrd</div>
-            <span class="text-[10px] text-slate-500">34.8% ulush</span>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-            <span class="text-[11px] text-slate-400">O'rtacha Daromad</span>
-            <div class="text-xl font-bold text-emerald-400 mt-1">6.91 mln</div>
-            <span class="text-[10px] text-slate-500">O'rtacha yosh: 37.8</span>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-            <span class="text-[11px] text-slate-400">Kredit Skoringi</span>
-            <div class="text-xl font-bold text-sky-400 mt-1">618.3</div>
-            <span class="text-[10px] text-slate-500">O'rta toifa</span>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-            <span class="text-[11px] text-slate-400">Raqamli Mijoz</span>
-            <div class="text-xl font-bold text-emerald-400 mt-1">86.2%</div>
-            <span class="text-[10px] text-slate-500">3,448 ta faol</span>
-          </div>
-        </div>
-
-        <!-- Loyiha maqsadi va Pipeline Strukturasi -->
-        <div class="grid lg:grid-cols-3 gap-6">
-          <div class="lg:col-span-2 bg-slate-900 border border-slate-800 p-5 rounded-xl space-y-3">
-            <h3 class="text-xs font-bold text-white uppercase tracking-wider">Loyiha Haqida & Analitik Pipeline</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Ushbu loyiha O'zbekiston tijorat banklarining 4000 ta mijozidan iborat real kredit portfeli ma'lumotlarini o'rganish, qarz oluvchilar riskini bashorat qilish, NPL (muammoli kreditlar) ulushini hisoblash va bank daromadligini optimallashtirish maqsadida amalga oshirilgan.
-            </p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2">
-              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-center">
-                <i class="fa-solid fa-file-excel text-emerald-400 mb-1"></i>
-                <div class="text-xs font-semibold text-white">Excel</div>
-                <div class="text-[10px] text-slate-400">Pivot & Tozalash</div>
-              </div>
-              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-center">
-                <i class="fa-solid fa-database text-sky-400 mb-1"></i>
-                <div class="text-xs font-semibold text-white">PostgreSQL</div>
-                <div class="text-[10px] text-slate-400">DENSE_RANK & CTE</div>
-              </div>
-              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-center">
-                <i class="fa-brands fa-python text-amber-400 mb-1"></i>
-                <div class="text-xs font-semibold text-white">Python</div>
-                <div class="text-[10px] text-slate-400">IQR & Churn Model</div>
-              </div>
-              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-center">
-                <i class="fa-solid fa-chart-pie text-purple-400 mb-1"></i>
-                <div class="text-xs font-semibold text-white">Power BI</div>
-                <div class="text-[10px] text-slate-400">3-Page Dashboard</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl space-y-3">
-            <h3 class="text-xs font-bold text-white uppercase tracking-wider">Tezkor Risk Xulosalari</h3>
-            <ul class="text-xs space-y-2 text-slate-300">
-              <li class="flex items-start gap-2">
-                <i class="fa-solid fa-triangle-exclamation text-rose-400 mt-0.5"></i>
-                <span><strong>559 ta Outlier:</strong> Kredit yuki foizi belgilangan me'yordan o'ta yuqori.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <i class="fa-solid fa-clock text-amber-400 mt-0.5"></i>
-                <span><strong>Overdraft & Mikroqarz:</strong> Muddatidan kechikish bo'yicha eng xavfli segment.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <i class="fa-solid fa-location-dot text-sky-400 mt-0.5"></i>
-                <span><strong>Portfel Markazi:</strong> Toshkent shahri (11.6 mlrd UZS) va viloyati.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================ -->
-      <!-- TAB 2: EXCEL -->
-      <!-- ============================================ -->
-      <div id="tab-excel" class="tab-content space-y-6">
-        <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-          <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">1.1 Baza Ko'rinishi (Namuna)</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left table-ui">
-              <thead>
-                <tr>
-                  <th>mijoz_id</th><th>to'liq_ism</th><th>jinsi</th><th>yoshi</th><th>Yosh_guruxi</th><th>viloyat</th><th>daromad_uzs</th><th>skoring</th><th>staj_guruxi</th>
-                </tr>
-              </thead>
-              <tbody class="text-slate-300">
-                <tr><td>UZB100000</td><td>Mirzayev Aziz</td><td>Erkak</td><td>43</td><td>35-44</td><td>Toshkent viloyati</td><td>7,500,000</td><td>640</td><td>Uzoq muddatli</td></tr>
-                <tr><td>UZB100001</td><td>Toshmatov Erkin</td><td>Erkak</td><td>31</td><td>25-34</td><td>Toshkent viloyati</td><td>6,200,000</td><td>610</td><td>Uzoq muddatli</td></tr>
-                <tr><td>UZB100002</td><td>Tursunova Dilfuza</td><td>Ayol</td><td>31</td><td>25-34</td><td>Toshkent shahri</td><td>8,100,000</td><td>690</td><td>O'rta (1-3 yil)</td></tr>
-                <tr><td>UZB100003</td><td>Nazarova Oydin</td><td>Ayol</td><td>48</td><td>45-54</td><td>Toshkent shahri</td><td>5,800,000</td><td>590</td><td>Uzoq muddatli</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="grid lg:grid-cols-3 gap-6">
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Viloyatlar Taqsimoti (Top)</h4>
-            <table class="w-full text-left table-ui">
-              <thead><tr><th>Viloyat</th><th>Mijoz soni</th></tr></thead>
-              <tbody class="text-slate-300">
-                <tr><td class="font-semibold text-emerald-400">Toshkent shahri</td><td>953</td></tr>
-                <tr><td>Toshkent viloyati</td><td>478</td></tr>
-                <tr><td>Samarqand</td><td>369</td></tr>
-                <tr><td>Andijon</td><td>315</td></tr>
-                <tr><td>Farg'ona</td><td>305</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Yosh & Jins (Pivot)</h4>
-            <table class="w-full text-left table-ui">
-              <thead><tr><th>Yosh</th><th>Ayol</th><th>Erkak</th><th>Jami</th></tr></thead>
-              <tbody class="text-slate-300">
-                <tr><td>18-24</td><td>282</td><td>290</td><td>572</td></tr>
-                <tr><td>25-34</td><td>500</td><td>510</td><td>1,010</td></tr>
-                <tr class="bg-slate-800/40 font-semibold text-emerald-300"><td>35-44</td><td>648</td><td>640</td><td>1,288</td></tr>
-                <tr><td>45-54</td><td>423</td><td>397</td><td>820</td></tr>
-                <tr><td>55+</td><td>147</td><td>163</td><td>310</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Daromad & Skoring</h4>
-            <table class="w-full text-left table-ui">
-              <thead><tr><th>Daromad guruhi</th><th>Mijoz soni</th></tr></thead>
-              <tbody class="text-slate-300">
-                <tr><td>O'rta (3-7 mln)</td><td class="font-semibold text-white">1,770 ta (44.3%)</td></tr>
-                <tr><td>Yuqori (7-15 mln)</td><td>1,113 ta</td></tr>
-                <tr><td>Past (&lt; 3 mln)</td><td>810 ta</td></tr>
-                <tr><td>Juda yuqori (15+ mln)</td><td>307 ta</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================ -->
-      <!-- TAB 3: SQL -->
-      <!-- ============================================ -->
-      <div id="tab-sql" class="tab-content space-y-6">
-        <div class="grid lg:grid-cols-2 gap-6">
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-sky-400">PostgreSQL: Baza va Jadval Yaratish</span>
-                <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">DDL</span>
-              </div>
-              <pre class="rounded-lg max-h-64"><code class="language-sql">CREATE DATABASE bank_tahlil;
-\c bank_tahlil
-
-CREATE TABLE mijozlar (
-    mijoz_id VARCHAR PRIMARY KEY,
-    "to'liq_ism" TEXT,
-    jinsi TEXT,
-    yoshi INT,
-    "Yosh_guruxi" TEXT,
-    viloyat TEXT,
-    bank TEXT,
-    kredit_summasi_uzs BIGINT,
-    "muddati_o'tgan_kunlar" INT,
-    "Kredit_yuklamasi_foiz" REAL
-);</code></pre>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl flex flex-col justify-between">
-            <div>
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-xs font-bold text-sky-400">DENSE_RANK Window Function (Top Mijozlar)</span>
-                <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">Analytics</span>
-              </div>
-              <pre class="rounded-lg max-h-64"><code class="language-sql">WITH ViloyatReyting AS (
-  SELECT mijoz_id, "to'liq_ism", viloyat, kredit_summasi_uzs,
-         DENSE_RANK() OVER(
-           PARTITION BY viloyat 
-           ORDER BY kredit_summasi_uzs DESC
-         ) AS orin
-  FROM mijozlar WHERE kredit_mavjud = 'Ha'
-)
-SELECT viloyat, orin, "to'liq_ism", kredit_summasi_uzs
-FROM ViloyatReyting WHERE orin <= 3;</code></pre>
-            </div>
-          </div>
-        </div>
-
-        <!-- Xavfli mijozlar jadvali -->
-        <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-          <h4 class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2 flex items-center gap-2">
-            <i class="fa-solid fa-triangle-exclamation"></i> Kechiktirilgan Qarzlar (Skoring &lt; 600 va muddati_o'tgan_qarz = 'Ha')
-          </h4>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left table-ui">
-              <thead><tr><th>ID</th><th>Mijoz F.I.O</th><th>Viloyat</th><th>Kredit Reytingi</th><th>Kredit Summasi (UZS)</th><th>Kechikish</th></tr></thead>
-              <tbody class="text-slate-300">
-                <tr><td>UZB103920</td><td>Abdullayev Karim</td><td>Qashqadaryo</td><td>461</td><td>3,134,242</td><td class="text-rose-400 font-bold">87 kun</td></tr>
-                <tr><td>UZB102925</td><td>Ibragimov Rustam</td><td>Xorazm</td><td>593</td><td>4,764,477</td><td class="text-rose-400 font-bold">82 kun</td></tr>
-                <tr><td>UZB100346</td><td>Tursunov Otabek</td><td>Navoiy</td><td>560</td><td>21,721,326</td><td class="text-rose-400 font-bold">66 kun</td></tr>
-                <tr><td>UZB101540</td><td>Juraev Nodir</td><td>Namangan</td><td>515</td><td>2,434,277</td><td>40 kun</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================ -->
-      <!-- TAB 4: PYTHON -->
-      <!-- ============================================ -->
-      <div id="tab-python" class="tab-content space-y-6">
-        <div class="grid lg:grid-cols-2 gap-6">
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-            <span class="text-xs font-bold text-amber-400 block mb-2">IQR Outlier Aniqlash va Churn Xavfi</span>
-            <pre class="rounded-lg"><code class="language-python"># Kredit yuki bo'yicha Outlier aniqlash (IQR)
-q1 = df['Kredit_yuklamasi_foiz'].quantile(0.25)
-q3 = df['Kredit_yuklamasi_foiz'].quantile(0.75)
-iqr = q3 - q1
-upper_limit = q3 + 1.5 * iqr
-
-outliers = df[df['Kredit_yuklamasi_foiz'] > upper_limit]
-print(f"Outlier mijozlar: {len(outliers)} ta") # 559 ta
-
-# Ketib qolish xavfi (Churn)
-df['churn_xavfi'] = np.where(
-    (df['oxirgi_kirish_kunlari'] > 60) | (df['faol_mijoz'] == "Yo'q"),
-    'Yuqori Churn Xavfi', 'Faol / Sodiq'
-)</code></pre>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
-            <span class="text-xs font-bold text-amber-400 block mb-2">Mijoz Qiymat Indeksi & Kvantillar (Tier 1-3)</span>
-            <pre class="rounded-lg"><code class="language-python"># Qiymat indeksi hisoblash
-df['mijoz_qiymat_indeksi'] = (
-    df["o'rtacha_oylik_daromad_uzs"] * 0.10 +
-    df["hisob_qoldig'i_uzs"] * 0.05 +
-    df["oxirgi_oy_tranzaksiya_hajmi_uzs"] * 0.02
-)
-
-# 3 ta toifaga ajratish (pd.qcut)
-df['mijoz_toifasi'] = pd.qcut(
-    df['mijoz_qiymat_indeksi'], q=3,
-    labels=['Oddiy (Tier 3)', 'Oltin (Tier 2)', 'Platina (Tier 1)']
-)</code></pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============================================ -->
-      <!-- TAB 5: POWER BI (APP GALLERY VIEW) -->
-      <!-- ============================================ -->
-      <div id="tab-powerbi" class="tab-content space-y-6">
-        <!-- Dashboard Page Switcher -->
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div class="flex gap-2 text-xs">
-            <button onclick="showPbi(1)" id="pbi-btn-1" class="pbi-tab px-3 py-1.5 rounded-lg bg-purple-950 text-purple-300 border border-purple-800 font-semibold">1-Sahifa: Segmentatsiya</button>
-            <button onclick="showPbi(2)" id="pbi-btn-2" class="pbi-tab px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">2-Sahifa: Kredit Riski</button>
-            <button onclick="showPbi(3)" id="pbi-btn-3" class="pbi-tab px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">3-Sahifa: Portfel Tahlili</button>
-          </div>
-          <a href="Bank_Portfolio_Analytics_Dashboard.pbix" download class="text-xs text-purple-400 hover:underline flex items-center gap-1">
-            <i class="fa-solid fa-download"></i> .PBIX yuklab olish
+    <!-- CONTENT 1: PDF HISOBOT (Worddagi barcha skrinshotlar bilan) -->
+    <section id="view-report" class="view-content active p-4 md:p-6 bg-slate-950">
+      <div class="w-full h-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900 flex flex-col">
+        <div class="h-10 bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between text-xs text-slate-400">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-400"></i> Amaliyot hisoboti (Excel filtrlash, SQL komandalari, Colab va xulosalar)
+          </span>
+          <a href="hisobot%20.pdf" target="_blank" class="text-emerald-400 hover:underline flex items-center gap-1">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Alohida oynada ochish
           </a>
         </div>
+        <iframe src="hisobot%20.pdf" class="w-full flex-1 border-0"></iframe>
+      </div>
+    </section>
 
-        <!-- PBI View 1 -->
-        <div id="pbi-view-1" class="pbi-screen space-y-4">
-          <div class="rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-            <img src="Screenshot_1.jpg" alt="Mijozlar Segmentatsiyasi" class="w-full h-auto">
-          </div>
-          <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs text-slate-300">
-            <strong>1-Sahifa Xulosasi:</strong> Retail va SME mijozlar depozit va kredit aylanmasining 65% dan ortig‘ini ta'minlaydi. Filial va agentlar jalb qilishda yetakchi.
-          </div>
+    <!-- CONTENT 2: POWER BI DASHBOARDS (Screenshot_1, 2, 3) -->
+    <section id="view-pbi" class="view-content p-6 overflow-y-auto space-y-6">
+      <!-- PBI Page Navigator -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+        <div class="flex gap-2">
+          <button onclick="switchPbiPage(1)" id="pbi-btn-1" class="px-3.5 py-1.5 rounded-lg bg-purple-950 text-purple-300 border border-purple-800 text-xs font-semibold shadow transition">
+            1-Sahifa: Segmentatsiya
+          </button>
+          <button onclick="switchPbiPage(2)" id="pbi-btn-2" class="px-3.5 py-1.5 rounded-lg bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition">
+            2-Sahifa: Kredit Riski & NPL
+          </button>
+          <button onclick="switchPbiPage(3)" id="pbi-btn-3" class="px-3.5 py-1.5 rounded-lg bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition">
+            3-Sahifa: Portfel Tahlili
+          </button>
         </div>
+        <span class="text-xs text-slate-400">Power BI Desktop 3-sahifali tahliliy monitoring</span>
+      </div>
 
-        <!-- PBI View 2 -->
-        <div id="pbi-view-2" class="pbi-screen hidden space-y-4">
-          <div class="rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-            <img src="Screenshot_2.jpg" alt="Kredit Riski va NPL" class="w-full h-auto">
-          </div>
-          <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs text-slate-300">
-            <strong>2-Sahifa Xulosasi:</strong> 3 mlrd so‘mlik muddati o‘tgan qarzlar asosan Overdraft va Mikroqarz mahsulotlariga to‘g‘ri kelmoqda (789 ta yuqori riskli mijoz).
-          </div>
+      <!-- Sahifa 1 -->
+      <div id="pbi-screen-1" class="pbi-screen active space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+          <img src="Screenshot_1.jpg" alt="Mijozlar Segmentatsiyasi" class="w-full h-auto object-cover">
         </div>
-
-        <!-- PBI View 3 -->
-        <div id="pbi-view-3" class="pbi-screen hidden space-y-4">
-          <div class="rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-            <img src="Screenshot_3.jpg" alt="Umumiy Portfel" class="w-full h-auto">
+        <div class="grid md:grid-cols-3 gap-3 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Mijoz Segmentlari (Treemap)</span>
+            <p class="text-slate-400">Retail va SME portfelning eng katta hajmini egallagan bo'lib, depozit va kredit aylanmasining asosini tashkil etadi.</p>
           </div>
-          <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs text-slate-300">
-            <strong>3-Sahifa Xulosasi:</strong> Umumiy 50.4 mlrd so‘mlik portfel barcha kredit turlari bo‘yicha deyarli teng (13%–15% dan) taqsimlangan bo‘lib, diversifikatsiya darajasi yuqori.
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Jalb Qilish Kanallari</span>
+            <p class="text-slate-400">Filial, Agent va Veb-sayt mijozlarni jalb qilishda yetakchilik qilmoqda, raqamli ilovalardan foydalanish darajasi yuqori.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Daromad va Kredit Hajmi</span>
+            <p class="text-slate-400">Daromad va berilgan kredit hajmi o'rtasida muvozanatli taqsimot mavjud, xatarlar diversifikatsiyalangan.</p>
           </div>
         </div>
       </div>
 
-    </div>
+      <!-- Sahifa 2 -->
+      <div id="pbi-screen-2" class="pbi-screen space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+          <img src="Screenshot_2.jpg" alt="Kredit Riski va NPL" class="w-full h-auto object-cover">
+        </div>
+        <div class="grid md:grid-cols-3 gap-3 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-rose-400 block mb-1">Muddati O'tgan Qarzlar</span>
+            <p class="text-slate-400">Jami 3 mlrd UZS muddati o'tgan qarz mavjud bo'lib, 789 ta mijoz yuqori risk darajasiga kiritilgan.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Xavf Darajalari Bo'yicha</span>
+            <p class="text-slate-400">Past xavf: 22bn (42.6%), O'rta: 18bn (36.2%), Yuqori: 8bn (16.0%), Juda yuqori: 3bn (5.1%).</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Kechikish Kunlari (Kun/Odam)</span>
+            <p class="text-slate-400">Overdraft va Mikroqarz mahsulotlarida muddati o'tib to'lanmay yurgan kunlar soni nisbatan yuqori.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sahifa 3 -->
+      <div id="pbi-screen-3" class="pbi-screen space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+          <img src="Screenshot_3.jpg" alt="Umumiy Portfel Tahlili" class="w-full h-auto object-cover">
+        </div>
+        <div class="grid md:grid-cols-2 gap-3 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Kredit Turlari Tarkibi</span>
+            <p class="text-slate-400">Mikroqarz (15.1%), Ipoteka (15.1%), Iste'mol krediti (14.6%), Overdraft (14.5%), Avtokredit (13.8%), Biznes (13.5%). Portfel to'liq muvozanatda.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+            <span class="font-bold text-white block mb-1">Hududiy Taqsimot</span>
+            <p class="text-slate-400">Toshkent shahri (11.6 mlrd UZS) va Toshkent viloyati (6.3 mlrd UZS) kredit summasi bo'yicha mutloq yetakchi hisoblanadi.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT 3: METRIKALAR & XULOSALAR -->
+    <section id="view-summary" class="view-content p-6 overflow-y-auto space-y-6">
+      <!-- 6 ta Asosiy KPI -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center">
+          <span class="text-[11px] text-slate-400 block mb-1">Jami Mijozlar</span>
+          <span class="text-xl font-bold text-white">4 000</span>
+          <span class="text-[10px] text-slate-500 block mt-1">2000 Ayol / 2000 Erkak</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center">
+          <span class="text-[11px] text-slate-400 block mb-1">Kredit Portfeli</span>
+          <span class="text-xl font-bold text-purple-400">50.4 mlrd</span>
+          <span class="text-[10px] text-slate-500 block mt-1">1 670 ta shartnoma</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center">
+          <span class="text-[11px] text-slate-400 block mb-1">Depozit Portfeli</span>
+          <span class="text-xl font-bold text-amber-400">10.1 mlrd</span>
+          <span class="text-[10px] text-slate-500 block mt-1">34.8% depozitorlar</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center">
+          <span class="text-[11px] text-slate-400 block mb-1">O'rtacha Daromad</span>
+          <span class="text-xl font-bold text-emerald-400">6.91 mln</span>
+          <span class="text-[10px] text-slate-500 block mt-1">O'rtacha yosh: 37.8</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center">
+          <span class="text-[11px] text-slate-400 block mb-1">O'rtacha Skoring</span>
+          <span class="text-xl font-bold text-sky-400">618.3</span>
+          <span class="text-[10px] text-slate-500 block mt-1">Reyting: O'rta</span>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl text-center">
+          <span class="text-[11px] text-slate-400 block mb-1">Raqamli Mijozlar</span>
+          <span class="text-xl font-bold text-emerald-400">86.2%</span>
+          <span class="text-[10px] text-slate-500 block mt-1">3 448 ta faol</span>
+        </div>
+      </div>
+
+      <!-- Xulosa va Tavsiyalar -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl space-y-3">
+          <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Asosiy Analitik Xulosalar</h3>
+          <ul class="text-xs space-y-2 text-slate-300 list-disc list-inside">
+            <li>Bank mijozlari asosan <strong>25–44 yosh</strong> oralig'idagi, poytaxt va viloyat markazlarida yashovchi raqamli xizmatlarga moyil fuqarolardir.</li>
+            <li>Kredit summasi va kredit yuki o'rtasida o'rtacha korrelyatsiya (r = 0.52) kuzatildi.</li>
+            <li>559 ta mijozda kredit yuki belgilangan me'yordan oshib ketgani (Outlier) aniqlandi.</li>
+          </ul>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl space-y-3">
+          <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Biznes va Risk Tavsiyalari</h3>
+          <ul class="text-xs space-y-2 text-slate-300 list-disc list-inside">
+            <li>Yosh va o'rta yoshdagi mijozlar uchun raqamli kredit liniyalari ko'lamini kengaytirish.</li>
+            <li>Overdraft va Mikroqarz mahsulotlarida erta ogohlantirish (Early Warning System) tizimini joriy etish.</li>
+            <li>Past kredit reytingli (skoring &lt; 500) qarz oluvchilar uchun garov talablarini kuchaytirish.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- Interactive JavaScript logic -->
+  <!-- ================= JAVASCRIPT ================= -->
   <script>
-    function switchTab(tabId) {
-      // Yashirish
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('text-emerald-400', 'bg-emerald-950/40', 'border-emerald-800/40');
-        btn.classList.add('text-slate-400');
-      });
+    function switchView(viewId) {
+      document.querySelectorAll('.view-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
 
-      // Ko'rsatish
-      document.getElementById(tabId).classList.add('active');
-      const activeBtn = document.getElementById(tabId.replace('tab-', 'btn-'));
-      if(activeBtn) {
-        activeBtn.classList.remove('text-slate-400');
-        activeBtn.classList.add('text-emerald-400', 'bg-emerald-950/40', 'border-emerald-800/40');
-      }
+      document.getElementById(viewId).classList.add('active');
+      const curBtn = document.getElementById(viewId.replace('view-', 'btn-'));
+      if(curBtn) curBtn.classList.add('active');
 
-      // Title o'zgartirish
       const titles = {
-        'tab-overview': "Boshqaruv Paneli & Portfel Ko'rsatkichlari",
-        'tab-excel': "Excel: Tozalash, Filtrlash va Pivot Matritsalar",
-        'tab-sql': "PostgreSQL: Ma'lumotlar Bazasi va Analitik Querylar",
-        'tab-python': "Python (Google Colab): Kengaytirilgan Data Science Tahlili",
-        'tab-powerbi': "Power BI: 3 Sahifali Interaktiv Rahbariyat Dashboardi"
+        'view-report': "Qadamma-Qadam Tahlil Hisoboti",
+        'view-pbi': "Power BI 3-Sahifali Dashboard",
+        'view-summary': "Portfel Ko'rsatkichlari va Risk Tavsiyalari"
       };
-      document.getElementById('page-title').innerText = titles[tabId];
+      document.getElementById('top-title').innerText = titles[viewId];
     }
 
-    function showPbi(pageNum) {
-      document.querySelectorAll('.pbi-screen').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.pbi-tab').forEach(btn => {
-        btn.classList.remove('bg-purple-950', 'text-purple-300', 'border-purple-800', 'font-semibold');
-        btn.classList.add('bg-slate-900', 'text-slate-400');
-      });
+    function switchPbiPage(pageNum) {
+      document.querySelectorAll('.pbi-screen').forEach(el => el.classList.remove('active'));
+      document.getElementById(`pbi-screen-${pageNum}`).classList.add('active');
 
-      document.getElementById(`pbi-view-${pageNum}`).classList.remove('hidden');
-      const curBtn = document.getElementById(`pbi-btn-${pageNum}`);
-      curBtn.classList.remove('bg-slate-900', 'text-slate-400');
-      curBtn.classList.add('bg-purple-950', 'text-purple-300', 'border-purple-800', 'font-semibold');
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`pbi-btn-${i}`);
+        if (i === pageNum) {
+          btn.className = "px-3.5 py-1.5 rounded-lg bg-purple-950 text-purple-300 border border-purple-800 text-xs font-semibold shadow transition";
+        } else {
+          btn.className = "px-3.5 py-1.5 rounded-lg bg-slate-900 text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition";
+        }
+      }
     }
   </script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </body>
 </html>
