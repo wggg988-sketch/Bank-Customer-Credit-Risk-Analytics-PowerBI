@@ -1,47 +1,45 @@
 <!DOCTYPE html>
-<html lang="uz" class="h-full bg-[#0b0f19]">
+<html lang="uz" class="h-full bg-[#080d1a]">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bank Credit Risk Intelligence | Executive Dashboard</title>
-  <!-- Tailwind CSS -->
+  <title>Bank Credit Risk Intelligence | Executive Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     .view-content { display: none; }
-    .view-content.active { display: flex; flex-direction: column; flex: 1; animation: fadeIn 0.25s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-    .nav-btn.active { background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.15)); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 0 15px rgba(56, 189, 248, 0.1); }
+    .view-content.active { display: flex; flex-direction: column; flex: 1; animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+    .nav-btn.active { background: #1e293b; color: #38bdf8; border: 1px solid #0284c7; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15); }
     .pbi-screen { display: none; }
     .pbi-screen.active { display: block; animation: fadeIn 0.2s ease-in; }
-    .metric-card { background: #111827; border: 1px solid rgba(255, 255, 255, 0.07); transition: transform 0.2s, border-color 0.2s; }
-    .metric-card:hover { transform: translateY(-2px); border-color: rgba(99, 102, 241, 0.4); }
+    .metric-card { background: #0f172a; border: 1px solid #1e293b; transition: all 0.2s; }
+    .metric-card:hover { border-color: #38bdf8; }
   </style>
 </head>
 <body class="h-full text-slate-200 font-sans flex flex-col md:flex-row overflow-hidden select-none">
 
   <!-- ================= SIDEBAR ================= -->
-  <aside class="w-full md:w-72 bg-[#0d1322] border-r border-slate-800/80 flex flex-col justify-between shrink-0 shadow-2xl">
+  <aside class="w-full md:w-72 bg-[#0c1322] border-r border-slate-800 flex flex-col justify-between shrink-0">
     <div>
       <!-- Brand Logo -->
-      <div class="p-5 border-b border-slate-800/80 flex items-center gap-3">
-        <div class="h-10 w-10 bg-gradient-to-br from-indigo-500 to-cyan-400 text-white rounded-xl flex items-center justify-center text-lg font-bold shadow-lg shadow-indigo-500/20">
-          <i class="fa-solid fa-vault"></i>
+      <div class="p-5 border-b border-slate-800 flex items-center gap-3">
+        <div class="h-10 w-10 bg-sky-500/10 border border-sky-500/30 text-sky-400 rounded-xl flex items-center justify-center text-lg font-bold shadow">
+          <i class="fa-solid fa-shield-halved"></i>
         </div>
         <div>
-          <h1 class="text-sm font-bold text-white tracking-wide">Risk Intelligence</h1>
-          <span class="text-[10px] text-cyan-400 uppercase tracking-widest font-semibold">Banking Analytics</span>
+          <h1 class="text-sm font-bold text-white tracking-wide">Risk Control Portal</h1>
+          <span class="text-[10px] text-sky-400 uppercase tracking-wider font-semibold">Tijorat Banklari Tahlili</span>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
       <div class="p-3 space-y-1.5">
-        <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Boshqaruv Modullari</div>
+        <div class="px-3 py-2 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tahlil Modullari</div>
 
-        <!-- 1. Kengaytirilgan Metrikalar (Standart ochiladigan) -->
+        <!-- 1. Birlamchi ochiladigan boyitilgan KPI ekrani -->
         <button onclick="switchView('view-summary')" id="btn-summary" class="nav-btn active w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-800/60 transition">
-          <i class="fa-solid fa-gauge-high w-4 text-center text-cyan-400"></i> Portfel Metrikalari & Risk KPI
+          <i class="fa-solid fa-gauge-high w-4 text-center text-sky-400"></i> Portfel Metrikalari & Risk KPI
         </button>
 
         <!-- 2. Power BI Dashboard -->
@@ -56,18 +54,18 @@
       </div>
     </div>
 
-    <!-- Yuklab olish markazi -->
-    <div class="p-4 border-t border-slate-800/80 bg-[#090d16] space-y-2">
-      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Loyiha Repozitoriysi:</span>
-      <a href="Bank_Portfolio_Analytics_Dashboard.pbix" download class="w-full flex items-center justify-between px-3 py-2 bg-indigo-950/40 hover:bg-indigo-900/50 border border-indigo-700/50 rounded-lg text-xs text-indigo-300 transition shadow-sm">
+    <!-- Fayllarni yuklab olish markazi -->
+    <div class="p-4 border-t border-slate-800 bg-[#080d1a] space-y-2">
+      <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Loyiha Repozitoriysi:</span>
+      <a href="Bank_Portfolio_Analytics_Dashboard.pbix" download class="w-full flex items-center justify-between px-3 py-2 bg-indigo-950/40 hover:bg-indigo-900/50 border border-indigo-700/50 rounded-lg text-xs text-indigo-300 transition">
         <span><i class="fa-solid fa-download mr-1.5"></i> Power BI (.PBIX)</span>
         <span class="text-[9px] bg-indigo-900 px-1.5 py-0.5 rounded text-indigo-200">Desktop</span>
       </a>
-      <a href="Bank_Mijozlari_Tozalangan_Excel.xlsx" download class="w-full flex items-center justify-between px-3 py-2 bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-700/50 rounded-lg text-xs text-emerald-300 transition shadow-sm">
+      <a href="Bank_Mijozlari_Tozalangan_Excel.xlsx" download class="w-full flex items-center justify-between px-3 py-2 bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-700/50 rounded-lg text-xs text-emerald-300 transition">
         <span><i class="fa-solid fa-file-excel mr-1.5"></i> Excel Baza (.XLSX)</span>
         <span class="text-[9px] bg-emerald-900 px-1.5 py-0.5 rounded text-emerald-200">Data</span>
       </a>
-      <a href="hisobot%20.pdf" download class="w-full flex items-center justify-between px-3 py-2 bg-slate-800/60 hover:bg-slate-700/70 border border-slate-700/60 rounded-lg text-xs text-slate-300 transition shadow-sm">
+      <a href="hisobot%20.pdf" download class="w-full flex items-center justify-between px-3 py-2 bg-slate-800/60 hover:bg-slate-700/70 border border-slate-700/60 rounded-lg text-xs text-slate-300 transition">
         <span><i class="fa-solid fa-file-pdf mr-1.5 text-rose-400"></i> To'liq Hisobot</span>
         <span class="text-[9px] bg-slate-700 px-1.5 py-0.5 rounded text-slate-300">PDF</span>
       </a>
@@ -75,23 +73,23 @@
   </aside>
 
   <!-- ================= MAIN WORKSPACE ================= -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#0b0f19]">
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#080d1a]">
 
     <!-- Top Status Header -->
-    <header class="h-16 border-b border-slate-800/80 bg-[#0d1322]/80 backdrop-blur-md px-6 flex items-center justify-between shrink-0">
+    <header class="h-16 border-b border-slate-800 bg-[#0c1322]/80 backdrop-blur-md px-6 flex items-center justify-between shrink-0">
       <div>
         <h2 id="top-title" class="text-sm md:text-base font-bold text-white tracking-wide">Portfel Ko'rsatkichlari va Kengaytirilgan Risk Tahlili</h2>
-        <p class="text-[11px] text-slate-400">PostgreSQL &bull; Python EDA &bull; Power BI &bull; 4,000 ta Mijoz Portfeli</p>
+        <p class="text-[11px] text-slate-400">PostgreSQL &bull; Python Colab EDA &bull; Power BI &bull; 4,000 ta Mijoz Portfeli</p>
       </div>
 
       <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-700/60 shadow-sm">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Baza Statusi: Faol (4,000)
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-950 text-sky-400 border border-sky-800 shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span> Baza Statusi: Faol (4,000)
         </span>
       </div>
     </header>
 
-    <!-- CONTENT 1: KENGAYTIRILGAN METRIKALAR & DASHBOARD (ASOSIY OYNA) -->
+    <!-- CONTENT 1: KENGAYTIRILGAN METRIKALAR & DASHBOARD (STANDART OCHILADI) -->
     <section id="view-summary" class="view-content active p-6 overflow-y-auto space-y-6">
 
       <!-- 1-QATOR: ASOSIY 5 TA FINTECH KPI -->
@@ -102,7 +100,7 @@
             <i class="fa-solid fa-briefcase text-indigo-400"></i>
           </div>
           <div class="text-2xl font-black text-white">50.4 <span class="text-sm font-normal text-slate-400">mlrd</span></div>
-          <div class="text-[10px] text-indigo-300/80 mt-1 flex items-center justify-between">
+          <div class="text-[10px] text-indigo-300 mt-1 flex items-center justify-between">
             <span>1,670 ta shartnoma</span>
             <span>41.8% ulush</span>
           </div>
@@ -114,13 +112,13 @@
             <i class="fa-solid fa-vault text-amber-400"></i>
           </div>
           <div class="text-2xl font-black text-white">10.1 <span class="text-sm font-normal text-slate-400">mlrd</span></div>
-          <div class="text-[10px] text-amber-300/80 mt-1 flex items-center justify-between">
+          <div class="text-[10px] text-amber-300 mt-1 flex items-center justify-between">
             <span>1,392 ta omonatchi</span>
             <span>34.8% qamrov</span>
           </div>
         </div>
 
-        <div class="metric-card p-4 rounded-xl border-rose-900/30">
+        <div class="metric-card p-4 rounded-xl border-rose-900/40">
           <div class="flex items-center justify-between text-slate-400 text-xs mb-1">
             <span>Muddati O'tgan (NPL)</span>
             <i class="fa-solid fa-circle-exclamation text-rose-400"></i>
@@ -159,7 +157,7 @@
 
       <!-- 2-QATOR: RISK VA SEGMENTATSIYA METRIKALARI -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5">
-        <div class="bg-[#111827] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
+        <div class="bg-[#0f172a] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
           <div>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Yuqori Xavfli Mijozlar</span>
             <div class="text-lg font-bold text-rose-400 mt-0.5">789 ta</div>
@@ -170,7 +168,7 @@
           </div>
         </div>
 
-        <div class="bg-[#111827] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
+        <div class="bg-[#0f172a] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
           <div>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Kredit Yuki Outlier (IQR)</span>
             <div class="text-lg font-bold text-amber-400 mt-0.5">559 ta</div>
@@ -181,7 +179,7 @@
           </div>
         </div>
 
-        <div class="bg-[#111827] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
+        <div class="bg-[#0f172a] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
           <div>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Ketish Xavfi (Churn)</span>
             <div class="text-lg font-bold text-orange-400 mt-0.5">54 ta</div>
@@ -192,28 +190,28 @@
           </div>
         </div>
 
-        <div class="bg-[#111827] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
+        <div class="bg-[#0f172a] border border-slate-800 p-3.5 rounded-xl flex items-center justify-between">
           <div>
             <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Raqamli Qamrov (App)</span>
-            <div class="text-lg font-bold text-emerald-400 mt-0.5">3,448 ta</div>
+            <div class="text-lg font-bold text-sky-400 mt-0.5">3,448 ta</div>
             <span class="text-[10px] text-slate-500">86.2% raqamli kanallarda</span>
           </div>
-          <div class="h-9 w-9 rounded-lg bg-emerald-950/50 border border-emerald-800/40 text-emerald-400 flex items-center justify-center text-sm">
+          <div class="h-9 w-9 rounded-lg bg-sky-950/50 border border-sky-800/40 text-sky-400 flex items-center justify-center text-sm">
             <i class="fa-solid fa-mobile-screen-button"></i>
           </div>
         </div>
       </div>
 
-      <!-- 3-QATOR: TAHLILIY JADVALLAR VA STRUKTURA -->
+      <!-- 3-QATOR: TAHLILIY BLOKLAR -->
       <div class="grid lg:grid-cols-3 gap-6">
 
         <!-- KREDIT TURLARI TAHLILI -->
-        <div class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+        <div class="bg-[#0f172a] border border-slate-800 p-5 rounded-2xl space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <i class="fa-solid fa-layer-group text-indigo-400"></i> Kredit Mahsulotlari Portfeli
             </h3>
-            <span class="text-[10px] text-slate-500">7 ta yo'nalish</span>
+            <span class="text-[10px] text-slate-500">7 ta mahsulot</span>
           </div>
           <div class="space-y-2.5 text-xs">
             <div>
@@ -288,16 +286,16 @@
           </div>
         </div>
 
-        <!-- HUDUDIY KONSENTRATSIYA (TOP VILOYATLAR) -->
-        <div class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+        <!-- HUDUDIY KONSENTRATSIYA -->
+        <div class="bg-[#0f172a] border border-slate-800 p-5 rounded-2xl space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <i class="fa-solid fa-location-dot text-cyan-400"></i> Hududiy Portfel Taqsimoti
+              <i class="fa-solid fa-location-dot text-cyan-400"></i> Hududiy Taqsimot
             </h3>
             <span class="text-[10px] text-slate-500">14 ta hudud</span>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="p-3 bg-[#0d1322] border border-slate-800 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#080d1a] border border-slate-800/80 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-white block">Toshkent shahri</span>
                 <span class="text-[10px] text-slate-400">953 ta mijoz (23.8%)</span>
@@ -308,7 +306,7 @@
               </div>
             </div>
 
-            <div class="p-3 bg-[#0d1322] border border-slate-800 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#080d1a] border border-slate-800/80 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-white block">Toshkent viloyati</span>
                 <span class="text-[10px] text-slate-400">478 ta mijoz (11.9%)</span>
@@ -319,7 +317,7 @@
               </div>
             </div>
 
-            <div class="p-3 bg-[#0d1322] border border-slate-800 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#080d1a] border border-slate-800/80 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-white block">Samarqand viloyati</span>
                 <span class="text-[10px] text-slate-400">369 ta mijoz (9.2%)</span>
@@ -330,7 +328,7 @@
               </div>
             </div>
 
-            <div class="p-3 bg-[#0d1322] border border-slate-800 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#080d1a] border border-slate-800/80 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-white block">Andijon viloyati</span>
                 <span class="text-[10px] text-slate-400">315 ta mijoz (7.8%)</span>
@@ -341,7 +339,7 @@
               </div>
             </div>
 
-            <div class="p-3 bg-[#0d1322] border border-slate-800 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#080d1a] border border-slate-800/80 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-white block">Boshqa 10 ta hudud</span>
                 <span class="text-[10px] text-slate-400">1,885 ta mijoz</span>
@@ -354,9 +352,9 @@
           </div>
         </div>
 
-        <!-- MIJOZLAR TOIFALARI (TIER 1-3) VA JALB QILISH -->
-        <div class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+        <!-- MIJOZLAR TOIFALARI (TIER 1-3) -->
+        <div class="bg-[#0f172a] border border-slate-800 p-5 rounded-2xl space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
             <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
               <i class="fa-solid fa-crown text-amber-400"></i> Mijoz Qiymat Indeksi (Tiering)
             </h3>
@@ -364,7 +362,7 @@
           </div>
 
           <div class="space-y-3 text-xs">
-            <div class="p-3 bg-gradient-to-r from-purple-950/40 to-slate-900 border border-purple-900/40 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-gradient-to-r from-purple-950/30 to-slate-900 border border-purple-800/30 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-purple-300 block">Platina (Tier 1)</span>
                 <span class="text-[10px] text-slate-400">Yuqori tranzaksiya va qoldiq</span>
@@ -375,7 +373,7 @@
               </div>
             </div>
 
-            <div class="p-3 bg-gradient-to-r from-amber-950/40 to-slate-900 border border-amber-900/40 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-gradient-to-r from-amber-950/30 to-slate-900 border border-amber-800/30 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-amber-300 block">Oltin (Tier 2)</span>
                 <span class="text-[10px] text-slate-400">O'rta barqaror toifa</span>
@@ -386,7 +384,7 @@
               </div>
             </div>
 
-            <div class="p-3 bg-[#0d1322] border border-slate-800 rounded-xl flex items-center justify-between">
+            <div class="p-3 bg-[#080d1a] border border-slate-800/80 rounded-xl flex items-center justify-between">
               <div>
                 <span class="font-bold text-slate-300 block">Oddiy (Tier 3)</span>
                 <span class="text-[10px] text-slate-400">Bazaviy foydalanuvchilar</span>
@@ -397,12 +395,12 @@
               </div>
             </div>
 
-            <div class="pt-2 border-t border-slate-800/80">
+            <div class="pt-2 border-t border-slate-800">
               <span class="text-[10px] text-slate-400 uppercase tracking-wider block mb-1.5">Eng Samadali Jalb Qilish Kanallari:</span>
               <div class="flex flex-wrap gap-1.5">
-                <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-300">Veb-sayt: 1.83 mlrd depozit</span>
-                <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-300">Partner: 1.75 mlrd depozit</span>
-                <span class="px-2 py-1 bg-slate-800 rounded text-[10px] text-slate-300">Agent: 302 ta kredit</span>
+                <span class="px-2 py-1 bg-slate-800/80 rounded text-[10px] text-slate-300">Veb-sayt: 1.83 mlrd depozit</span>
+                <span class="px-2 py-1 bg-slate-800/80 rounded text-[10px] text-slate-300">Partner: 1.75 mlrd depozit</span>
+                <span class="px-2 py-1 bg-slate-800/80 rounded text-[10px] text-slate-300">Agent: 302 ta kredit</span>
               </div>
             </div>
           </div>
@@ -410,45 +408,45 @@
 
       </div>
 
-      <!-- 4-QATOR: XULOSA VA TAVSIYALAR PANELI -->
+      <!-- 4-QATOR: ANALITIK TOPILMALAR VA TAVSIYALAR -->
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-3">
+        <div class="bg-[#0f172a] border border-slate-800 p-5 rounded-2xl space-y-3">
           <div class="flex items-center gap-2 text-emerald-400 text-xs font-bold uppercase tracking-wider">
             <i class="fa-solid fa-chart-simple"></i> Asosiy Analitik Topilmalar
           </div>
           <ul class="text-xs space-y-2 text-slate-300 list-disc list-inside leading-relaxed">
-            <li>Bank mijozlari asosan <strong>25–44 yosh</strong> oralig'idagi, poytaxt va yirik hududlarda yashovchi raqamli xizmatlarga o'ta moyil aholi qatlamidir.</li>
+            <li>Bank mijozlari asosan <strong>25–44 yosh</strong> oralig'idagi, shaharlik va raqamli xizmatlarga moyil fuqarolardir[cite: 1].</li>
             <li>Kredit summasi va kredit yuklamasi foizi o'rtasida o'rtacha to'g'ri korrelyatsiya (<strong>r = 0.52</strong>) mavjud[cite: 1].</li>
-            <li>Aniqlangan <strong>559 ta Outlier</strong> mijozda qarz yuki daromadiga nisbatan xavfli darajada yuqori[cite: 1].</li>
-            <li>Kredit portfelining <strong>35.6% qismi Toshkent shahri va viloyati</strong> hissasiga to'g'ri kelib, hududiy konsentratsiya xatari mavjud[cite: 1].</li>
+            <li>Aniqlangan <strong>559 ta Outlier</strong> mijozda qarz yuki daromadiga nisbatan yuqori[cite: 1].</li>
+            <li>Kredit portfelining <strong>35.6% qismi Toshkent shahri va viloyati</strong> hissasiga to'g'ri keladi[cite: 1].</li>
           </ul>
         </div>
 
-        <div class="bg-[#111827] border border-slate-800 p-5 rounded-2xl space-y-3">
+        <div class="bg-[#0f172a] border border-slate-800 p-5 rounded-2xl space-y-3">
           <div class="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider">
             <i class="fa-solid fa-lightbulb"></i> Bank Risk-Menejmenti Uchun Tavsiyalar
           </div>
           <ul class="text-xs space-y-2 text-slate-300 list-disc list-inside leading-relaxed">
-            <li><strong>Overdraft va Mikroqarz</strong> mahsulotlarida to'lov muddati kechikishini erta aniqlovchi EWS (Early Warning System) mexanizmini kuchaytirish[cite: 1].</li>
-            <li>Past kredit reytingli (skoring &lt; 500) bo'lgan <strong>346 ta mijoz</strong> uchun avtomatik kredit limitlarini cheklash[cite: 1].</li>
-            <li>Raqamli kanallardan (mobil ilova) faol foydalanmayotgan <strong>552 ta mijozni</strong> ilovaga jalb qilish orqali tranzaksiya hajmini oshirish[cite: 1].</li>
+            <li><strong>Overdraft va Mikroqarz</strong> mahsulotlarida to'lov muddati kechikishini erta aniqlovchi EWS mexanizmini kuchaytirish[cite: 1].</li>
+            <li>Past kredit reytingli (skoring &lt; 500) bo'lgan <strong>346 ta mijoz</strong> uchun kredit limitlarini optimallashtirish[cite: 1].</li>
+            <li>Raqamli kanallardan faol foydalanmayotgan <strong>552 ta mijozni</strong> ilovaga jalb qilish[cite: 1].</li>
           </ul>
         </div>
       </div>
 
     </section>
 
-    <!-- CONTENT 2: POWER BI DASHBOARDS (GALEREYA) -->
+    <!-- CONTENT 2: POWER BI DASHBOARDS -->
     <section id="view-pbi" class="view-content p-6 overflow-y-auto space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
         <div class="flex gap-2">
-          <button onclick="switchPbiPage(1)" id="pbi-btn-1" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold text-xs shadow-md transition">
+          <button onclick="switchPbiPage(1)" id="pbi-btn-1" class="px-3.5 py-1.5 rounded-lg bg-sky-600 text-white font-semibold text-xs shadow-md transition">
             1-Sahifa: Segmentatsiya
           </button>
-          <button onclick="switchPbiPage(2)" id="pbi-btn-2" class="px-3.5 py-1.5 rounded-lg bg-[#111827] text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition">
+          <button onclick="switchPbiPage(2)" id="pbi-btn-2" class="px-3.5 py-1.5 rounded-lg bg-[#0f172a] text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition">
             2-Sahifa: Kredit Riski & NPL
           </button>
-          <button onclick="switchPbiPage(3)" id="pbi-btn-3" class="px-3.5 py-1.5 rounded-lg bg-[#111827] text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition">
+          <button onclick="switchPbiPage(3)" id="pbi-btn-3" class="px-3.5 py-1.5 rounded-lg bg-[#0f172a] text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition">
             3-Sahifa: Portfel Tahlili
           </button>
         </div>
@@ -457,39 +455,39 @@
 
       <!-- Sahifa 1 -->
       <div id="pbi-screen-1" class="pbi-screen active space-y-4">
-        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#111827]">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#0f172a]">
           <img src="Screenshot_1.jpg" alt="Mijozlar Segmentatsiyasi" class="w-full h-auto object-cover">
         </div>
-        <div class="p-4 bg-[#111827] rounded-xl border border-slate-800 text-xs text-slate-300">
-          <strong>1-Sahifa Xulosasi:</strong> Retail va SME segmentlari portfel aylanmasining asosiy qismini ta'minlaydi[cite: 1]. Filial va agentlar jalb qilishda yetakchi[cite: 1].
+        <div class="p-4 bg-[#0f172a] rounded-xl border border-slate-800 text-xs text-slate-300">
+          <strong>1-Sahifa Xulosasi:</strong> Retail va SME segmentlari portfel aylanmasining asosiy qismini ta'minlaydi[cite: 1]. Filial va agentlar mijoz jalb qilishda yetakchi[cite: 1].
         </div>
       </div>
 
       <!-- Sahifa 2 -->
       <div id="pbi-screen-2" class="pbi-screen space-y-4">
-        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#111827]">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#0f172a]">
           <img src="Screenshot_2.jpg" alt="Kredit Riski va NPL" class="w-full h-auto object-cover">
         </div>
-        <div class="p-4 bg-[#111827] rounded-xl border border-slate-800 text-xs text-slate-300">
+        <div class="p-4 bg-[#0f172a] rounded-xl border border-slate-800 text-xs text-slate-300">
           <strong>2-Sahifa Xulosasi:</strong> 3 mlrd so'mlik muddati o'tgan qarzlar asosan Overdraft va Mikroqarz mahsulotlariga to'g'ri kelmoqda[cite: 1].
         </div>
       </div>
 
       <!-- Sahifa 3 -->
       <div id="pbi-screen-3" class="pbi-screen space-y-4">
-        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#111827]">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#0f172a]">
           <img src="Screenshot_3.jpg" alt="Umumiy Portfel Tahlili" class="w-full h-auto object-cover">
         </div>
-        <div class="p-4 bg-[#111827] rounded-xl border border-slate-800 text-xs text-slate-300">
+        <div class="p-4 bg-[#0f172a] rounded-xl border border-slate-800 text-xs text-slate-300">
           <strong>3-Sahifa Xulosasi:</strong> Umumiy 50.4 mlrd so'mlik portfel barcha kredit turlari bo'yicha deyarli teng (13%–15% dan) taqsimlangan[cite: 1].
         </div>
       </div>
     </section>
 
     <!-- CONTENT 3: TO'LIQ PDF HISOBOT -->
-    <section id="view-report" class="view-content p-4 md:p-6 bg-[#0b0f19]">
-      <div class="w-full h-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#111827] flex flex-col">
-        <div class="h-10 bg-[#0d1322] border-b border-slate-800 px-4 flex items-center justify-between text-xs text-slate-400">
+    <section id="view-report" class="view-content p-4 md:p-6 bg-[#080d1a]">
+      <div class="w-full h-full rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-[#0f172a] flex flex-col">
+        <div class="h-10 bg-[#0c1322] border-b border-slate-800 px-4 flex items-center justify-between text-xs text-slate-400">
           <span class="flex items-center gap-2">
             <i class="fa-solid fa-circle-check text-emerald-400"></i> Amaliyot hisoboti (Word asosidagi PDF hujjat)[cite: 1]
           </span>
@@ -528,9 +526,9 @@
       for (let i = 1; i <= 3; i++) {
         const btn = document.getElementById(`pbi-btn-${i}`);
         if (i === pageNum) {
-          btn.className = "px-3.5 py-1.5 rounded-lg bg-indigo-600 text-white font-semibold text-xs shadow-md transition";
+          btn.className = "px-3.5 py-1.5 rounded-lg bg-sky-600 text-white font-semibold text-xs shadow-md transition";
         } else {
-          btn.className = "px-3.5 py-1.5 rounded-lg bg-[#111827] text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition";
+          btn.className = "px-3.5 py-1.5 rounded-lg bg-[#0f172a] text-slate-400 border border-slate-800 hover:text-white text-xs font-semibold transition";
         }
       }
     }
