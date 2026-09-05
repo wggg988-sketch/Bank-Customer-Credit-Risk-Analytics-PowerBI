@@ -32,7 +32,7 @@ Loyiha ma'lumotlar tahlilchisi (Data Analyst) sifatida ma'lumotlarni tozalash, t
 * **Jalb Qilish Kanallari:** Filial, Mobil ilova, Veb-sayt, Agent, Call-center kanallarining samaradorligi va mijozlar faolligi.
 * **Daromad va Kredit Hajmi Korrelyatsiyasi:** Oylik daromad va olingan kredit miqdori o'rtasidagi bog'liqlik (Scatter Plot).
 * **KYC Verifikatsiyasi:** Mijozlarning identifikatsiya statuslari (Tasdiqlangan, Kutilmoqda, Rad etilgan).
-* ![1-sahifa](Screenshot_1.jpg)
+* ![1-sahifa](Screenshot_3.jpg)
 
 ---
 
